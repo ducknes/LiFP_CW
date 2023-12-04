@@ -5,7 +5,7 @@ domains
 predicates
   match(string, pattern, list)
   find_matches(string, pattern)
-  matches(string, pattern)
+  matches(string, list)
   any_string(string, string, string)
   any_symbol(string, string, string)
   one_symbol(string, string, string)
@@ -13,14 +13,13 @@ predicates
 
 clauses
   find_matches(InputString, Pattern) :- 
-    match(InputString, Pattern, ResultMatch), !, matches(InputString, Pattern);
+    match(InputString, Pattern, ResultMatch), !, matches(InputString, ResultMatch);
     nl, write(InputString, " -> "), nl,
     write("No one matches").
 
-  matches(InputString, Pattern) :- 
-    match(InputString, Pattern, MatchResult),
+  matches(InputString, ResultMatch) :- 
     nl, write(InputString, " -> "), nl,
-    write(MatchResult).
+    write(ResultMatch).
   matches(_, _).
 
   match("", [], []).
