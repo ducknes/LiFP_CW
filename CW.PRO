@@ -10,6 +10,7 @@ predicates
   any_symbol(string, string, string)
   one_symbol(string, string, string)
   other_symbol(string, char, string, string)
+  check(char, char)
 
   find_matches2(string, pattern)
   match2(string, pattern, list)
@@ -22,8 +23,12 @@ clauses
     write("No one matches").
 
   find_matches2(InputString, Pattern) :- 
+    frontchar(InputString, FirstChar, Remain),
+    check('C', FirstChar), !,
     nl,
     match2(InputString, Pattern, ResultMatch), !, matches(InputString, ResultMatch).
+
+  check(FirstChar, FirstChar).
 
   matches(InputString, ResultMatch) :- 
     nl, write(InputString, " -> "), nl,
